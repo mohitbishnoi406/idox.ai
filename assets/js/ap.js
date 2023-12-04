@@ -6,42 +6,35 @@ setTimeout(() => {
 }, 2500);
 
 //   navbar
-let nav = document.querySelector(".nav");
-let menubar = document.querySelector(".menuicon");
-let loadtake = document.querySelector(".nav-logo")
-let finish = document.querySelectorAll(".finish");
-let overlay = document.querySelector(".over-layer")
-let bgbody = document.querySelector(".bg-bodys");
-let span1 = document.querySelector(".span1");
-let span2 = document.querySelector(".span2");
-let span3 = document.querySelector(".span3");
-nav.addEventListener("click", function () {
-    menubar.classList.toggle("left-0")
-    nav.classList.toggle("nav-bg")
-    nav.classList.toggle("nav-2")
-    span1.classList.toggle("nav1")
-    span2.classList.toggle("nav2")
-    span3.classList.toggle("nav3")
-    document.body.classList.toggle("overflow-hidden")
-    overlay.classList.toggle("left-0")
-    bgbody.classList.toggle("over-flow")
-})
+let label = document.querySelector(".label");
+let menu = document.querySelector("#menu");
+let aTags = document.querySelectorAll("#menu li a");
+let open = 0;
 
-finish.forEach(e => {
-    e.addEventListener("click", function () {
-        menubar.classList.remove("left-0")
-        span1.classList.toggle("nav1")
-        nav.classList.toggle("nav-bg")
-        span2.classList.toggle("nav2")
-        span3.classList.toggle("nav3")
-        bgbody.classList.remove("over-flow")
-        overlay.classList.toggle("left-0")
-        span2.classList.toggle("nav2")
-        span3.classList.toggle("nav3")
-        document.body.classList.toggle("overflow-hidden")
+aTags.forEach((c) => {
+    c.addEventListener("click", () => {
+        if (open != 0) {
+            menu.style.right ='-100%'; 
+            document.body.classList.remove("overflow-y-hidden");
+            label.classList.remove("label-switch");
+            open--;
+        }
     })
+}) 
+label.addEventListener("click", () => {
+    if (open == 0) {
+        menu.style.right = 0;
+        document.body.classList.add("overflow-y-hidden");
+        label.classList.add("label-switch");
+        open++;
+    }
+    else {
+        menu.style.right = '-100%';
+        document.body.classList.remove("overflow-y-hidden");
+        label.classList.remove("label-switch");
+        open--;
+    }
 });
-
  // backtotop-button
  document.addEventListener("DOMContentLoaded", function () {
   const button = document.getElementById("back-to-top");
@@ -54,7 +47,6 @@ finish.forEach(e => {
           button.style.display = "none";
       }
   };
-
   // Scroll back to the top when the button is clicked
   button.onclick = function () {
       document.body.scrollTop = 0;
@@ -125,20 +117,25 @@ $('.colab-slick').slick({
   ]
 
 })
-
-
-
-
-
 $(".customer-slider").slick({
     dots: true,
     infinite: true,
     speed: 300,
     centerMode: true,
-    centerPadding: "200px",
+    centerPadding: "520px",
     slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
+      {
+        breakpoint: 1500,
+        settings: {
+          centerPadding: "300px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 991.5,
         settings: {
